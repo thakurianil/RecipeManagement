@@ -19,7 +19,7 @@ function Header({ onSearch }) {
   return (
     <div>
       <nav className="navbar navbar-light bg-light justify-content-between">
-        <Button className="navbar-brand bg-light"onClick={handleRefresh}>Recipe Management</Button>
+        <Button className="navbar-brand bg-light"onClick={handleRefresh} style={{border: "none"}}>Recipe Management</Button>
 
         <form className="form-inline" onSubmit={handleSearchSubmit}>
           <input
