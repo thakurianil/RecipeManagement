@@ -378,7 +378,7 @@ function Recipe() {
   return (
     <div>
       <Header onSearch={handleSearch} />
-      <div className="d-flex flex-wrap justify-content-between ">
+      <div className="d-flex flex-wrap justify-content-around ">
         {filteredRecipes.map((recipe) => (
           <Card key={recipe._id} style={{ width: "19rem", margin: "2em" }}>
             <Card.Img

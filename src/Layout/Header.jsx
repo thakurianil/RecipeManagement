@@ -8,7 +8,6 @@ function Header({ onSearch }) {
     setSearchTerm(e.target.value);
   };
 
-  // Handle the form submission
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     onSearch(searchTerm); 
@@ -19,7 +18,7 @@ function Header({ onSearch }) {
   return (
     <div>
       <nav className="navbar navbar-light bg-light justify-content-between">
-        <Button className="navbar-brand bg-light"onClick={handleRefresh} style={{border: "none"}}>Recipe Management</Button>
+        <Button className="navbar-brand bg-light"onClick={handleRefresh} style={{border: "none"}}>Recipe Viewer</Button>
 
         <form className="form-inline" onSubmit={handleSearchSubmit}>
           <input
