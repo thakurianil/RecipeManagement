@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Button from 'react-bootstrap/esm/Button';
 
 function Header({ onSearch }) {
   const [searchTerm, setSearchTerm] = useState("");
@@ -12,11 +13,14 @@ function Header({ onSearch }) {
     e.preventDefault();
     onSearch(searchTerm); 
   };
-
+  const handleRefresh = () => {
+    window.location.reload(); 
+  };
   return (
     <div>
       <nav className="navbar navbar-light bg-light justify-content-between">
-        <a className="navbar-brand">Recipe Management</a>
+        <Button className="navbar-brand bg-light"onClick={handleRefresh}>Recipe Management</Button>
+
         <form className="form-inline" onSubmit={handleSearchSubmit}>
           <input
             className="form-control mr-sm-2"
