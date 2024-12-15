@@ -10,7 +10,7 @@ function App() {
       <Routes>
         {/* Public Routes */}
         <Route path="*" element={<DefaultLayout />}>
-
+        <Route index element={<Recipe />} />
         </Route>
         </Routes>
     </>
