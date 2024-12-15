@@ -7,8 +7,8 @@ import { Footer } from "./Footer";
 export const DefaultLayout = ({ children, pageTitle }) => {
   return (
     <div>
-      {/* header  */}
-      <Header />
+
+
       <Container>
         <div className="p-2">{pageTitle}</div>
         <main className="main">

@@ -2,11 +2,11 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useState } from "react";
-
+import Header from "./Header";
 function Recipe() {
   const [show, setShow] = useState(false);
-  const [selectedRecipe, setSelectedRecipe] = useState(null); // Track the selected recipe
-
+  const [selectedRecipe, setSelectedRecipe] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
   const recipes = [
     {
       _id: 1,
@@ -205,86 +205,96 @@ function Recipe() {
     setSelectedRecipe(null);
   };
 
-  return (
-    <div className="d-flex flex-wrap justify-content-around">
-      {recipes.map((recipe) => (
-        <Card key={recipe._id} style={{ width: "18rem", margin: "1rem" }}>
-          <Card.Img
-            variant="top"
-            src={recipe.thumbnail}
-            alt={recipe.title}
-            style={{
-              width: "100%",
-              height: "200px", // Adjust the height as needed
-              objectFit: "cover", // Ensures the image fits the space
-            }}
-          />
-          <Card.Body>
-            <Card.Title>{recipe.title}</Card.Title>
-            <Card.Subtitle className="mb-2 text-muted">
-              Cuisine: {recipe.cuisine}
-            </Card.Subtitle>
-            <Card.Text>
-              <strong>Cooking Time:</strong> {recipe.cookingTime} minutes
-            </Card.Text>
-            <Button variant="primary" onClick={() => handleShow(recipe)}>
-              View Ingredient
-            </Button>
-          </Card.Body>
-        </Card>
-      ))}
+  const handleSearch = (searchTerm) => {
+    setSearchTerm(searchTerm); // Update the search term
+  };
 
-      {selectedRecipe && (
-        <Modal
-          show={show}
-          onHide={handleClose}
-          dialogClassName="modal-lg"
-          aria-labelledby="example-custom-modal-styling-title"
-        >
-          <Modal.Header closeButton>
-            <Modal.Title id="example-custom-modal-styling-title">
-              <Card.Title>{selectedRecipe.title}</Card.Title>
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <div className="row">
-              <div className="col-md-4">
-                <Card.Img
-                  variant="top"
-                  src={selectedRecipe.thumbnail}
-                  alt={selectedRecipe.title}
-                  style={{
-                    width: "100%",
-                    height: "200px", // Adjust the height as needed
-                    objectFit: "cover", // Ensures the image fits the space
-                  }}
-                />
-              </div>
-              <div className="col-md-8">
-                <Card.Subtitle className="mb-2 text-muted">
-                  Cuisine: {selectedRecipe.cuisine}
-                </Card.Subtitle>
-                <Card.Text>
-                  <strong>Cooking Time:</strong> {selectedRecipe.cookingTime}{" "}
-                  minutes
-                </Card.Text>
-                <p>
-                  <ul>
-                    {selectedRecipe.ingredients.map((ingredient, index) => (
-                      <li key={index}>{ingredient}</li>
-                    ))}
-                  </ul>
-                </p>
-              </div>
-            </div>
-            <div className="d-flex justify-content-end">
-              <Button variant="primary" onClick={handleClose}>
-                Return
+  const filteredRecipes = recipes.filter(
+    (recipe) =>
+      recipe.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      recipe.cuisine.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  return (
+    <div>
+      <Header onSearch={handleSearch} />
+      <div className="d-flex flex-wrap justify-content-around">
+        {filteredRecipes.map((recipe) => (
+          <Card key={recipe._id} style={{ width: "18rem", margin: "1rem" }}>
+            <Card.Img
+              variant="top"
+              src={recipe.thumbnail}
+              alt={recipe.title}
+              style={{
+                width: "100%",
+                height: "200px", // Adjust the height as needed
+                objectFit: "cover", // Ensures the image fits the space
+              }}
+            />
+            <Card.Body>
+              <Card.Title>{recipe.title}</Card.Title>
+              <Card.Subtitle className="mb-2 text-muted">
+                Cuisine: {recipe.cuisine}
+              </Card.Subtitle>
+              <Card.Text>
+                <strong>Cooking Time:</strong> {recipe.cookingTime} minutes
+              </Card.Text>
+              <Button variant="primary" onClick={() => handleShow(recipe)}>
+                View Ingredient
               </Button>
-            </div>
-          </Modal.Body>
-        </Modal>
-      )}
+            </Card.Body>
+            {selectedRecipe && (
+              <Modal
+                show={show}
+                onHide={handleClose}
+                dialogClassName="modal-lg"
+                aria-labelledby="example-custom-modal-styling-title"
+              >
+                <Modal.Header closeButton>
+                  <Modal.Title id="example-custom-modal-styling-title">
+                    <Card.Title>{selectedRecipe.title}</Card.Title>
+                  </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <div className="row">
+                    <div className="col-md-4">
+                      <Card.Img
+                        variant="top"
+                        src={selectedRecipe.thumbnail}
+                        alt={selectedRecipe.title}
+                        className="recipe-image"
+                      />
+                    </div>
+                    <div className="col-md-8">
+                      <Card.Subtitle className="mb-2 text-muted">
+                        <strong>Cuisine:</strong> {selectedRecipe.cuisine}
+                      </Card.Subtitle>
+                      <Card.Text>
+                        <strong>Cooking Time:</strong>{" "}
+                        {selectedRecipe.cookingTime} minutes
+                      </Card.Text>
+                      <p>
+                        <strong>Ingredients:</strong>
+                        <ul>
+                          {selectedRecipe.ingredients.map(
+                            (ingredient, index) => (
+                              <li key={index}>{ingredient}</li>
+                            )
+                          )}
+                        </ul>
+                      </p>
+                      <div className="d-flex justify-content-end">
+                        <Button variant="primary" onClick={handleClose}>
+                          Return
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </Modal.Body>
+              </Modal>
+            )}
+          </Card>
+        ))}
+      </div>
     </div>
   );
 }
