@@ -17,7 +17,6 @@ export const DefaultLayout = ({ children, pageTitle }) => {
         </main>
       </Container>
 
-      {/* footer  */}
       <Footer />
     </div>
   );
