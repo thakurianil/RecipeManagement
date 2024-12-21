@@ -369,11 +369,6 @@ function Recipe() {
     setSearchTerm(searchTerm);
   };
 
-  const filteredRecipes = recipes.filter(
-    (recipe) =>
-      recipe.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      recipe.cuisine.toLowerCase().includes(searchTerm.toLowerCase())
-  );
 
   return (
     <div>
