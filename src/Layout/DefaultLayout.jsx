@@ -10,6 +10,12 @@ export const DefaultLayout = ({ children, pageTitle }) => {
     
     <div>
 
+      <Container>
+        <div className="p-2">{pageTitle}</div>
+        <main className="main">
+          <Outlet />
+        </main>
+      </Container>
 
       <Footer />
     </div>
