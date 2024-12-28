@@ -428,26 +428,7 @@ function Recipe() {
                   className="recipe-image"
                 />
               </div>
-              <div className="col-md-8">
-                <Card.Subtitle className="mb-2 text-muted">
-                  <strong>Cuisine:</strong> {selectedRecipe.cuisine}
-                </Card.Subtitle>
-                <Card.Text>
-                  <strong>Cooking Time:</strong> {selectedRecipe.cookingTime}{" "}
-                  minutes
-                </Card.Text>
-                <h5>Ingredients:</h5>
-                <ul>
-                  {selectedRecipe.ingredients.map((ingredient, index) => (
-                    <li key={index}>{ingredient}</li>
-                  ))}
-                </ul>
-                <div className="d-flex justify-content-end">
-                  <Button variant="secondary" onClick={handleClose}>
-                    Close
-                  </Button>
-                </div>
-              </div>
+
             </div>
           </Modal.Body>
         </Modal>
