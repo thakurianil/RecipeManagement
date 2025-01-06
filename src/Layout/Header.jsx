@@ -4,6 +4,9 @@ import Button from 'react-bootstrap/esm/Button';
 function Header({ onSearch }) {
   const [searchTerm, setSearchTerm] = useState("");
 
+  const handleInputChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
